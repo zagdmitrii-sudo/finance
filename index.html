@@ -149,7 +149,6 @@ nav .pill{position:relative}.bdg{position:absolute;top:-4px;right:4px;min-width:
 .btn-s,.chip.btn-s{position:relative}.btn-s::after{content:'';position:absolute;left:0;right:0;top:-6px;bottom:-6px}
 
 html,body,button,summary,.tile,.chip,.tg,.op,.ci{touch-action:manipulation}
-/* ряды */
 .tiles,.seg.scr,.tw{overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;touch-action:pan-x pan-y;overscroll-behavior-x:contain;scroll-snap-type:none}
 .tiles,.seg.scr{cursor:grab;-webkit-user-select:none;user-select:none}.tiles.is-drag,.seg.scr.is-drag{cursor:grabbing}.tiles.is-drag *,.seg.scr.is-drag *{cursor:grabbing;pointer-events:none}
 body.dragging{-webkit-user-select:none;user-select:none}
@@ -157,24 +156,21 @@ body.dragging{-webkit-user-select:none;user-select:none}
 .hwrap{position:relative;min-width:0;max-width:100%}
 .sarr{position:absolute;top:50%;transform:translateY(-50%);width:36px;height:36px;min-height:0;padding:0 0 3px;border-radius:50%;background:var(--card);border:1px solid var(--line2);box-shadow:0 2px 10px rgba(0,0,0,.2);display:none;align-items:center;justify-content:center;z-index:2;font-size:22px;line-height:1;color:var(--ink);touch-action:manipulation}.sarr.l{left:-6px}.sarr.r{right:-6px}
 .sarr:disabled{opacity:.35;cursor:default;box-shadow:none}.sarr:not(:disabled):hover{background:var(--accsoft)}.sarr:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
-/* скроллбары */
 *{scrollbar-width:thin;scrollbar-color:var(--acc) var(--line)}
 ::-webkit-scrollbar{width:12px;height:12px}::-webkit-scrollbar-track{background:var(--line);border-radius:12px}::-webkit-scrollbar-thumb{background:var(--acc);border-radius:12px;border:3px solid var(--line)}::-webkit-scrollbar-thumb:hover{border-width:2px}::-webkit-scrollbar-corner{background:transparent}
-.tiles::-webkit-scrollbar,.tw::-webkit-scrollbar{height:10px}.tiles::-webkit-scrollbar:hover,.tw::-webkit-scrollbar:hover{height:12px}
+.tiles::-webkit-scrollbar,.tw::-webkit-scrollbar{height:10px}
 .seg.scr{scrollbar-width:none}.seg.scr::-webkit-scrollbar{display:none}
 .sheet,.ep,.dbox,.tw,.tiles{overscroll-behavior:contain}
 body.lock{overflow:hidden}
-/* range */
 input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:32px;min-height:32px;background:transparent;border:0;padding:0;margin:0;cursor:pointer;--p:0%;touch-action:pan-y;box-shadow:none}
 input[type=range]::-webkit-slider-runnable-track{height:8px;border-radius:8px;background:linear-gradient(to right,var(--acc) var(--p),var(--line) var(--p))}
 input[type=range]::-moz-range-track{height:8px;border-radius:8px;background:var(--line)}input[type=range]::-moz-range-progress{height:8px;border-radius:8px;background:var(--acc)}
 input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;margin-top:-7px;border-radius:50%;background:var(--acc);border:3px solid #fff;box-shadow:0 1px 5px rgba(0,0,0,.3);transition:transform .15s}
 input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:var(--acc);border:3px solid #fff;box-shadow:0 1px 5px rgba(0,0,0,.3);transition:transform .15s}
-input[type=range]:hover::-webkit-slider-thumb,input[type=range]:active::-webkit-slider-thumb{transform:scale(1.15)}input[type=range]:hover::-moz-range-thumb,input[type=range]:active::-moz-range-thumb{transform:scale(1.15)}
+input[type=range]:hover::-webkit-slider-thumb,input[type=range]:active::-webkit-slider-thumb{transform:scale(1.15)}
 input[type=range]:focus{outline:0;box-shadow:none}input[type=range]:focus-visible{outline:2px solid var(--acc);outline-offset:2px;border-radius:8px}
 .rngrow{display:flex;align-items:center;gap:12px;margin:-4px 6px 8px}.rngrow .rv{min-width:46px;text-align:right;font-weight:700;color:var(--acct)}
 input[type=checkbox],input[type=radio]{accent-color:var(--acc)}
-/* состояния и переполнение */
 button:disabled,input:disabled,select:disabled{opacity:.45;cursor:not-allowed;filter:none}
 .tile:focus-visible,.op:focus-visible,.chip:focus-visible,.tg:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
 @media (hover:hover){.op:hover,.tile:hover,.ci:hover{filter:brightness(.97)}[data-mode=dark] .op:hover,[data-mode=dark] .tile:hover{filter:brightness(1.12)}}
@@ -197,7 +193,7 @@ nav em{overflow:hidden;text-overflow:ellipsis;max-width:100%}
 <div id="dlg" onclick="if(event.target===this)dlgDo(0)"></div>
 <div class="modal" id="modal" onclick="if(event.target===this)closeM()"><div class="sheet" id="sheet"></div></div>
 <script>
-var KEY='fin_v1',VER='v10';
+var KEY='fin_v1',VER='v11';
 function $(s){return document.querySelector(s)}
 function pad(n){return String(n).padStart(2,'0')}
 function iso(d){return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())}
@@ -265,7 +261,6 @@ if(!o.sel){o.sel=(o.accs||[]).map(function(a){return a.id}).filter(function(id){
 (o.rec||[]).forEach(function(r){if(!r.remU){r.remU='d';r.remN=r.remind}});
 var wasOld=o.v<6;if(wasOld)scaleK(o);o.v=6;Object.keys(d).forEach(function(k){if(!(k in o))o[k]=d[k]});if(wasOld){o.onb=true;(o.tx||[]).forEach(function(t){if(t.ext&&!t.fp)t.fp=fpOf(t.date,t.amt,t.acc,t.note)})}return o}
 var S;try{S=migrate(JSON.parse(localStorage.getItem(KEY)||'null'))}catch(e){S=def()}
-function persist(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){uiAlert('Не удалось сохранить: мало места. Сделай резервную копию и удали лишние фото.')}}
 function save(){persist();render()}
 function theme(){var d=S.theme==='dark'||(S.theme==='auto'&&window.matchMedia&&matchMedia('(prefers-color-scheme:dark)').matches),h=document.documentElement;h.setAttribute('data-theme',curPal());h.setAttribute('data-mode',d?'dark':'light')}
 
@@ -470,7 +465,7 @@ function togTax(){S.tax.on=!S.tax.on;if(S.tax.on&&!acc(S.tax.acc)){var id=uid();
 function dl(name,txt,type){var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([txt],{type:type}));a.download=name;document.body.appendChild(a);a.click();a.remove()}
 function exportCSV(){dl('траты.csv','\ufeffдата;сумма;категория;счёт;заметка\n'+S.tx.map(function(t){return [t.date,(t.amt/100).toString().replace('.',','),t.cat,accName(t.acc),(t.note||'').replace(/;/g,',')].join(';')}).join('\n'),'text/csv')}
 function exportJSON(){S.lastBackup=today();persist();dl('finance-backup.json',JSON.stringify(S),'application/json');render()}
-function importJSON(f){if(!f)return;var r=new FileReader();r.onload=function(){S=migrate(JSON.parse(r.result));save()};r.readAsText(f)}
+function importJSON(f){if(!f)return;var r=new FileReader();r.onload=function(){var c=S.cloud;S=migrate(JSON.parse(r.result));if(c)S.cloud=c;save()};r.readAsText(f)}
 function exportICS(){var end=addMonths(today(),12),L=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//fin//RU'];
 activeRec().forEach(function(r){occ(r,end).forEach(function(d){var x=d.replace(/-/g,'');L.push('BEGIN:VEVENT','UID:'+r.id+x+'@fin','DTSTAMP:'+today().replace(/-/g,'')+'T000000Z','DTSTART;VALUE=DATE:'+x,'SUMMARY:💳 '+r.name+' '+Math.round(r.amt/100)+' ₽','BEGIN:VALARM','ACTION:DISPLAY','DESCRIPTION:'+r.name,'TRIGGER:-P'+r.remind+'D','END:VALARM','BEGIN:VALARM','ACTION:DISPLAY','DESCRIPTION:'+r.name+' сегодня','TRIGGER:PT9H','END:VALARM','END:VEVENT')})});L.push('END:VCALENDAR');dl('траты.ics',L.join('\r\n'),'text/calendar')}
 
@@ -698,7 +693,7 @@ function uiAlert(msg){dlgShow(esc(msg),[['OK',null,'pri']])}
 function uiConfirm(msg,ok,label,danger){dlgShow(esc(msg),[['Отмена',null,''],[label||'Да',ok,danger?'dng':'pri']])}
 function uiPrompt(msg,df,cb){dlgShow(esc(msg)+'<input id="dlgIn" value="'+esc(df||'')+'" style="margin-top:12px" onkeydown="if(event.key===\'Enter\')dlgDo(1)">',[['Отмена',null,''],['Готово',cb,'pri']])}
 function scaleK(o){(o.accs||[]).forEach(function(a){a.open=Math.round((a.open||0)*100);a.target=Math.round((a.target||0)*100)});(o.tx||[]).forEach(function(t){t.amt=Math.round(t.amt*100)});(o.dep||[]).forEach(function(d){d.amt=Math.round(d.amt*100)});(o.rec||[]).forEach(function(r){r.amt=Math.round(r.amt*100)});Object.keys(o.limits||{}).forEach(function(k){o.limits[k]=Math.round(o.limits[k]*100)})}
-function def(){var o=def5();scaleK(o);o.v=6;o.meta={};o.nextIncome='';o.buffer=0;o.expInc=0;o.queue=[];o.fps={};o.rules=[];o.eco=false;o.onb=false;o.defCur='RUB';o.demo=false;o.os='all';o.q='';o.hz2=3;o.ui={homeOpen:true,prev:'home'};o.rmh='out';return o}
+function def(){var o=def5();scaleK(o);o.v=6;o.meta={};o.nextIncome='';o.buffer=0;o.expInc=0;o.queue=[];o.fps={};o.rules=[];o.eco=false;o.onb=false;o.defCur='RUB';o.demo=false;o.os='all';o.q='';o.hz2=3;o.ui={homeOpen:true,prev:'home'};o.rmh='out';o.cloud={rev:0,dirty:false,at:''};return o}
 function importantOne(){var t=today(),p=activeRec().filter(function(r){return r.next<=t});if(p.length)return{ico:'hourglass',t:'Списания: '+p.length,b:'Открыть',f:'openPending()'};
 var q=S.queue.length;if(q)return{ico:'inbox',t:'На проверку: '+q+' '+plural(q,'операция','операции','операций'),b:'Проверить',f:"S.tab='ops';S.os='queue';save()"};
 var pj=projection(addDays(t,30));if(pj.deficit)return{ico:'alert',t:'Возможный дефицит '+dlabel(pj.deficit),b:'Календарь',f:"S.tab='plan';S.ps='cal';save()"};
@@ -766,7 +761,7 @@ function rep(){return rep0()+stepCard()}
 function openWhatIf(){openM('<div class="row"><h2>Что если?</h2><button class="btn-s" onclick="closeM()">Закрыть</button></div><div class="hint">Проверь, как покупка, новый платёж или падение дохода повлияют на безопасный остаток.</div><label>Разовая покупка, ₽</label><input id="wp" type="tel" inputmode="numeric" placeholder="0" oninput="mask(this);calcWI()"><label>Новый платёж в месяц, ₽</label><input id="wm" type="tel" inputmode="numeric" placeholder="0" oninput="mask(this);calcWI()"><label>Падение дохода, %</label><input id="wd" type="tel" inputmode="numeric" placeholder="0" oninput="calcWI()"><div id="wr" style="margin-top:14px"></div>');calcWI()}
 function calcWI(){var p=num('#wp'),m=num('#wm'),d=Math.min(100,parseFloat($('#wd').value)||0),w=whatIf(p,m,d);
 $('#wr').innerHTML='<div class="card"><div class="row"><span>Безопасный остаток сейчас</span><b>'+fmt(w.now)+'</b></div><div class="row" style="margin-top:6px"><span>После сценария</span><b class="'+(w.nowScen<0?'neg':'')+'">'+fmt(w.nowScen)+'</b></div></div><div class="card"><div class="tw"><table class="tbl"><thead><tr><th>Горизонт</th><th>Без изменений</th><th>Со сценарием</th></tr></thead><tbody>'+w.rows.map(function(r){return '<tr><td>'+r.n+' мес.</td><td class="'+(r.base<0?'neg':'')+'">'+fmt(r.base)+'</td><td class="'+(r.scen<0?'neg':'')+'">'+fmt(r.scen)+'</td></tr>'}).join('')+'</tbody></table></div><div class="tiny">Месячный итог: '+fmt(w.base)+' → '+fmt(w.scen)+'. Основано на ожидаемом доходе из «Плана → Прогноз» (или среднем доходе за 90 дней), регулярных платежах, средних тратах и минимальных взносах.</div></div>'}
-function set(){return '<div class="card"><button class="pri" style="width:100%" onclick="goFund()">'+ic('layers',18)+' Финансовая система</button><div class="tiny help">Счета, распределение дохода, подушка, долги, цели, проекты и «Мне должны».</div></div>'+
+function set1(){return '<div class="card"><button class="pri" style="width:100%" onclick="goFund()">'+ic('layers',18)+' Финансовая система</button><div class="tiny help">Счета, распределение дохода, подушка, долги, цели, проекты и «Мне должны».</div></div>'+
 '<div class="card"><h2>Остаток</h2><label>След. доход</label><input type="date" aria-label="Дата следующего дохода" value="'+esc(S.nextIncome||'')+'" onchange="S.nextIncome=this.value;save()"><label>Доход в месяц, ₽</label><input type="tel" inputmode="numeric" value="'+fv(S.expInc)+'" oninput="mask(this)" onchange="S.expInc=pn(this.value);save()"><label>Буфер, ₽</label><input type="tel" inputmode="numeric" value="'+fv(S.buffer)+'" placeholder="0" oninput="mask(this)" onchange="S.buffer=pn(this.value);save()"><div class="tiny help">Буфер всегда вычитается из свободных денег — это твой резерв на непредвиденное.</div></div>'+
 set0()+rulesCard()+
 '<div class="card"><h2>Защита</h2><div class="tiny" style="margin-top:0">PIN защищает только от случайного открытия приложения. Он не шифрует данные: они хранятся в браузере в открытом виде. Для переноса используй резервную копию.</div></div>'+
@@ -866,6 +861,7 @@ function obSkip(){S.onb=true;closeM();save()}
 function obDemo(){demoData();S.onb=true;closeM();save();toast('Демо-данные добавлены — удалить можно в «Настройках»')}
 
 
+function persist(){try{if(S.cloud)S.cloud.dirty=true;localStorage.setItem(KEY,JSON.stringify(S))}catch(e){uiAlert('Не удалось сохранить: мало места. Сделай резервную копию и удали лишние фото.')}cloudSoon()}
 
 /* ===== v10: перерисовка без морганий, вкладки с памятью, ряды со стрелками ===== */
 var TABS=['home','ops','plan','rep'],TABST={},LASTHTML='',LASTNAV='',OBS=[],RO=null,SCRSET=false,SD=null,SUP=null;
@@ -878,7 +874,6 @@ function applyScroll(st){if(!st)return;var l=hsEls(),i;for(i=0;i<l.length;i++)if
 function slideTo(from,to){var a=$('#app'),i=TABS.indexOf(from),j=TABS.indexOf(to),cls=(i<0||j<0)?'fade':(j>i?'slide-l':'slide-r');a.classList.remove('slide-l','slide-r','fade');void a.offsetWidth;a.classList.add(cls);clearTimeout(window.SLT);window.SLT=setTimeout(function(){a.classList.remove('slide-l','slide-r','fade')},260)}
 function foldHelp(root){if(!root||!root.querySelectorAll)return;var els=root.querySelectorAll('.hint,.help'),i;for(i=0;i<els.length;i++){var el=els[i],tx=(el.textContent||'').trim(),par=el.parentNode;if(!tx||!par)continue;var host=par.querySelector('h2'),b=document.createElement('button');b.className='tipb';b.setAttribute('aria-label','Подсказка');b.textContent='i';b.setAttribute('data-t',tx);b.onclick=function(ev){ev.stopPropagation();uiAlert(this.getAttribute('data-t'))};
 if(host){host.appendChild(b);par.removeChild(el)}else par.replaceChild(b,el)}}
-/* --- горизонтальные ряды --- */
 function animRow(el,t){var from=el.scrollLeft;el._tgt=t;if(el._raf&&typeof cancelAnimationFrame==='function')cancelAnimationFrame(el._raf);
 if(reduced()||Math.abs(t-from)<2||typeof requestAnimationFrame!=='function'){el.scrollLeft=t;el._anim=false;if(el._upd)el._upd();return}
 el._anim=true;var t0=null,dur=220;
@@ -965,7 +960,48 @@ document.addEventListener('touchmove',function(e){if(!rowEl||!e.touches||!e.touc
 document.addEventListener('touchend',function(e){var t=e.changedTouches&&e.changedTouches[0];if(!t)return;var dx=t.clientX-sx,dy=t.clientY-sy;if(rowEl&&rowMoved)SUP={el:rowEl,until:Date.now()+350};
 if(!blockSwipe&&Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.6&&TABS.indexOf(S.tab)>=0&&!$('#modal').classList.contains('show')&&!$('#dlg').classList.contains('show')){var i=TABS.indexOf(S.tab)+(dx<0?1:-1);if(i>=0&&i<TABS.length){S.tab=TABS[i];save()}}},{passive:true})})();
 
+
+/* ===== облако (Supabase) ===== */
+var CLOUD_URL='https://letuqjmvszrxojghizqn.supabase.co/functions/v1/hyper-responder',CST='off',CT=null,CBUSY=false,CPEND=false,CLAST='',CVIS=0;
+function cloudInit(){return (window.Telegram&&Telegram.WebApp&&Telegram.WebApp.initData)||''}
+function cloudOn(){return !!cloudInit()}
+function cloudPayload(){var o=JSON.parse(JSON.stringify(S));['cloud','pin','pinLen','bio','tab','ui','os','q','ps','ds','rp','ro','rm','rmh','hz','hz2','cm','lastBackup'].forEach(function(k){delete o[k]});return o}
+function persistRaw(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+function cloudCall(body){return fetch(CLOUD_URL,{method:'POST',headers:{'content-type':'application/json','x-init-data':cloudInit()},body:JSON.stringify(body)}).then(function(r){return r.json().catch(function(){return{}}).then(function(j){j._s=r.status;return j})})}
+function cloudUI(){if(S.tab==='set')render()}
+function cloudSoon(){if(!cloudOn()||CST==='conflict'||CST==='auth')return;clearTimeout(CT);CT=setTimeout(function(){cloudPush(false)},2500)}
+function applyCloud(data,rev){var keep={pin:S.pin,pinLen:S.pinLen,bio:S.bio,tab:S.tab,ui:S.ui,priv:S.priv,theme:S.theme,pal:S.pal,sound:S.sound,os:S.os,ps:S.ps,ds:S.ds,rp:S.rp,hz:S.hz,hz2:S.hz2,lastBackup:S.lastBackup,cloud:S.cloud};
+S=migrate(JSON.parse(JSON.stringify(data)));Object.keys(keep).forEach(function(k){if(keep[k]!==undefined)S[k]=keep[k]});S.cloud={rev:rev,dirty:false,at:new Date().toISOString()};CLAST=JSON.stringify(cloudPayload());persistRaw()}
+function cloudPush(force){if(!cloudOn())return Promise.resolve();if(CBUSY){CPEND=true;return Promise.resolve()}
+var payload=cloudPayload(),str=JSON.stringify(payload);if(!force&&str===CLAST&&(S.cloud.rev||0)>0){S.cloud.dirty=false;persistRaw();return Promise.resolve()}
+CBUSY=true;CST='sync';cloudUI();
+return cloudCall({action:'put',base_rev:S.cloud.rev||0,data:payload,force:!!force}).then(function(j){CBUSY=false;
+if(j._s===409){CST='conflict';cloudUI();cloudConflict();return}
+if(j.ok){S.cloud.rev=j.rev;S.cloud.at=new Date().toISOString();CLAST=str;S.cloud.dirty=(JSON.stringify(cloudPayload())!==str);persistRaw();CST='ok';if(S.cloud.dirty)CPEND=true}
+else CST=j._s===401?'auth':(j._s===413?'big':'err');
+cloudUI();if(CPEND){CPEND=false;cloudSoon()}}).catch(function(){CBUSY=false;CST='err';cloudUI()})}
+function cloudConflict(){dlgShow('Данные в облаке и на этом устройстве различаются. Что оставить?',[['Позже',null,''],['Облако',function(){cloudTake()},''],['Это устройство',function(){cloudPush(true)},'pri']])}
+function cloudTake(){if(!cloudOn())return uiAlert('Облако работает только внутри Telegram');return cloudCall({action:'get'}).then(function(j){if(!j.ok||!j.snapshot){toast('В облаке пока пусто');return}
+try{localStorage.setItem('fin_prev',JSON.stringify(S))}catch(e){}
+applyCloud(j.snapshot.data,j.snapshot.rev);CST='ok';render();toast('Загружено из облака. Прежние данные устройства сохранены (Настройки → Облако → Откатить)')}).catch(function(){CST='err';cloudUI()})}
+function cloudRestorePrev(){var p=null;try{p=JSON.parse(localStorage.getItem('fin_prev'))}catch(e){}if(!p)return uiAlert('Копии нет');uiConfirm('Вернуть данные, которые были на этом устройстве до загрузки из облака?',function(){var c=S.cloud;S=migrate(p);S.cloud=c;S.cloud.dirty=true;persist();render();toast('Данные устройства возвращены')},'Вернуть')}
+function cloudPull(){if(!cloudOn()){CST='off';cloudUI();return Promise.resolve()}CST='sync';cloudUI();
+return cloudCall({action:'get'}).then(function(j){
+if(j._s===401){CST='auth';cloudUI();return}if(!j.ok){CST='err';cloudUI();return}
+var snap=j.snapshot,lr=S.cloud.rev||0;
+if(!snap){return cloudPush(false)}
+if(snap.rev===lr){CST='ok';cloudUI();if(S.cloud.dirty)return cloudPush(false);return}
+var fresh=(S.tx.length+S.dep.length===0&&!S.demo);
+if(snap.rev>lr&&((lr>0&&!S.cloud.dirty)||(lr===0&&fresh))){try{localStorage.setItem('fin_prev',JSON.stringify(S))}catch(e){}applyCloud(snap.data,snap.rev);CST='ok';render();return}
+CST='conflict';cloudUI();cloudConflict()}).catch(function(){CST='err';cloudUI()})}
+function cloudStart(){if(!cloudOn()){CST='off';return}cloudPull();if(!window.__cloudVis){window.__cloudVis=1;document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible'&&Date.now()-CVIS>15000&&!S.cloud.dirty&&CST!=='conflict'){CVIS=Date.now();cloudPull()}})}}
+function cloudNow(){if(!cloudOn())return uiAlert('Облако работает только внутри Telegram');CST=(CST==='conflict'||CST==='auth')?'sync':CST;cloudPull()}
+function cloudForce(){if(!cloudOn())return uiAlert('Облако работает только внутри Telegram');uiConfirm('Перезаписать облако данными с этого устройства?',function(){cloudPush(true)},'Перезаписать',true)}
+function cloudCard(){var st={off:'Доступно только в Telegram',sync:'Синхронизация…',ok:'Синхронизировано',err:'Нет связи — данные сохранены на устройстве',auth:'Откройте приложение заново из Telegram',conflict:'Нужен выбор: облако или это устройство',big:'Слишком большой объём (уберите лишние фото)'}[CST]||'';
+return '<div class="card"><div class="row"><h2 style="margin:0">Облако</h2><b class="'+(CST==='ok'?'pos':CST==='off'||CST==='sync'?'mute':'neg')+'">'+(CST==='ok'?'●':CST==='sync'?'○':CST==='off'?'—':'!')+'</b></div><div class="mute sm" style="margin:6px 0 10px">'+st+((S.cloud&&S.cloud.at&&CST==='ok')?' · '+new Date(S.cloud.at).toLocaleString('ru-RU'):'')+'</div><div class="chips"><button class="chip btn-s" onclick="cloudNow()">Синхронизировать</button><button class="chip btn-s" onclick="cloudTake()">Взять из облака</button><button class="chip btn-s" onclick="cloudForce()">Записать в облако</button>'+(localStorage.getItem('fin_prev')?'<button class="chip btn-s" onclick="cloudRestorePrev()">Откатить</button>':'')+'</div></div>'}
+function set(){return cloudCard()+set1()}
+
 (function(){var sh=document.getElementById('sheet'),y0=null,dy=0;sh.addEventListener('touchstart',function(e){if(sh.scrollTop<=0){y0=e.touches[0].clientY;dy=0}},{passive:true});sh.addEventListener('touchmove',function(e){if(y0==null)return;dy=e.touches[0].clientY-y0;if(dy>0){sh.style.transform='translateY('+dy+'px)';sh.style.transition='none'}else{dy=0}},{passive:true});sh.addEventListener('touchend',function(){if(y0==null)return;sh.style.transition='';sh.style.transform='';if(dy>110)closeM();y0=null;dy=0})})();
 render();lockInit();if(!S.onb)setTimeout(function(){openOnb(0)},350);if(S.ratesDate!==today())fetchRates(false);
-(function(){try{var s=document.createElement('script');s.async=true;s.src='https://telegram.org/js/telegram-web-app.js';s.onload=function(){try{if(window.Telegram&&Telegram.WebApp){Telegram.WebApp.ready();Telegram.WebApp.expand()}}catch(e){}};document.head.appendChild(s)}catch(e){}})();
+(function(){try{var s=document.createElement('script');s.async=true;s.src='https://telegram.org/js/telegram-web-app.js';s.onload=function(){try{if(window.Telegram&&Telegram.WebApp){Telegram.WebApp.ready();Telegram.WebApp.expand()}}catch(e){}try{cloudStart()}catch(e){}};document.head.appendChild(s)}catch(e){}})();
 </script></body></html>
